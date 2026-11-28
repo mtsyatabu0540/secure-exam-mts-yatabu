@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_label">Secure Exam Browser</string>
+
+    <string name="nav_back">Kembali</string>
+
+    <!-- Menu -->
+    <string name="menu_home">Halaman Utama</string>
+    <string name="menu_scan_qr">Scan QR Code</string>
+    <string name="menu_security_status">Status Keamanan</string>
+    <string name="menu_violation_history">Riwayat Pelanggaran</string>
+    <string name="menu_alert_tone_test">Tes Nada Peringatan</string>
+    <string name="menu_pin_settings">Pengaturan PIN Admin</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_subtitle">Browser ujian MTs Yatabu</string>
+    <string name="dashboard_status_label">Status keamanan</string>
+    <string name="dashboard_menu_title">Menu</string>
+    <string name="dashboard_violation_count">Pelanggaran tercatat: %1$d</string>
+    <string name="security_status_inactive">Belum aktif (modul keamanan dikerjakan pada tahap berikutnya)</string>
+    <string name="security_status_active">Aktif</string>
+
+    <!-- Halaman placeholder -->
+    <string name="desc_scan_qr">Pemindai QR Code belum aktif. Fitur ini dikerjakan setelah kerangka aplikasi berhasil dikompilasi.</string>
+    <string name="desc_security_status">Halaman status keamanan belum aktif. Modul Security Manager dikerjakan pada tahap berikutnya.</string>
+    <string name="desc_violation_history">Daftar riwayat pelanggaran belum ditampilkan. Penyimpanan Room sudah disiapkan; tampilan daftar dikerjakan pada tahap berikutnya.</string>
+    <string name="desc_alert_tone_test">Tes nada peringatan belum aktif. Modul Alert Manager dikerjakan pada tahap berikutnya.</string>
+    <string name="desc_pin_settings">Pengaturan PIN admin belum aktif. Modul PIN Manager dikerjakan pada tahap berikutnya.</string>
+</resources>

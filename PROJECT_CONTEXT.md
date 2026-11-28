@@ -131,6 +131,18 @@ Gunakan pemisahan modul sesuai tanggung jawab:
 
 Sesuaikan struktur folder dengan proyek Android Studio yang benar-benar sudah dibuat. Jangan membuat struktur baru yang merusak file yang sudah ada.
 
+Struktur aktual (Tahap 1), root package `id.mtsyatabu.secureexam` di `app/src/main/java/id/mtsyatabu/secureexam/`:
+
+- `SecureExamApp.kt` — Application, memegang `AppContainer`.
+- `di/AppContainer.kt` — penyedia dependency manual (tanpa library DI).
+- `data/local/` — `AppDatabase`, `ViolationDao`, `ViolationEntity` (Room).
+- `data/repository/ViolationRepository.kt`.
+- `security/SecurityManager.kt` — kontrak minimal + `PlaceholderSecurityManager` (selalu INACTIVE).
+- `scanner/QrScanner.kt`, `webview/SecureWebView.kt`, `alert/AlertManager.kt`, `pin/PinManager.kt` — hanya interface penanda, BELUM ada implementasi.
+- `ui/main/` — `MainActivity` (dashboard) dan `MainViewModel`.
+- `ui/common/` — `BaseFeatureActivity` (halaman placeholder), `WindowInsetsExt.kt` (edge-to-edge).
+- `ui/scan|security|history|alert|pin/` — Activity placeholder untuk tiap menu.
+
 ## 7. ATURAN PENGEMBANGAN
 
 1. Repository GitHub Private adalah sumber utama kode aplikasi.
@@ -148,18 +160,18 @@ Sesuaikan struktur folder dengan proyek Android Studio yang benar-benar sudah di
 
 ## 8. STATUS PENGEMBANGAN
 
-Status awal proyek:
+Keterangan: `[x]` selesai dan sudah diverifikasi · `[~]` sudah ditulis tetapi BELUM diverifikasi build/uji · `[ ]` belum dikerjakan.
 
-- [ ] Repository GitHub Private dibuat.
-- [ ] Proyek Android Studio dibuat.
-- [ ] Dashboard selesai.
+- [x] Repository GitHub Private dibuat.
+- [~] Proyek Android Studio dibuat — kerangka Gradle, Manifest, resource, dan kode Kotlin sudah ditulis (Tahap 1), belum pernah dibuild di Android Studio.
+- [~] Dashboard selesai — layout dan navigasi menu ke halaman placeholder sudah ditulis, belum dijalankan.
 - [ ] QR Scanner selesai.
 - [ ] URL validation selesai.
 - [ ] Secure WebView selesai.
-- [ ] Security Manager selesai.
-- [ ] Alert Manager selesai.
-- [ ] PIN Administrator selesai.
-- [ ] Room Database selesai.
+- [ ] Security Manager selesai. (hanya kontrak minimal dan implementasi placeholder)
+- [ ] Alert Manager selesai. (hanya interface penanda)
+- [ ] PIN Administrator selesai. (hanya interface penanda)
+- [~] Room Database selesai — baru `AppDatabase`, `ViolationEntity`, `ViolationDao`; belum dibuild/diuji.
 - [ ] Integrasi seluruh modul selesai.
 - [ ] Pengujian website ujian sebenarnya selesai.
 - [ ] APK Debug berhasil dibuat.
@@ -167,17 +179,34 @@ Status awal proyek:
 
 ## 9. CATATAN PERKEMBANGAN
 
-Tahap terakhir: Belum dimulai.
+Tahap terakhir: Tahap 1 — kerangka awal proyek Android. Kode sudah ditulis, menunggu verifikasi build oleh pemilik proyek di Android Studio.
 
-Tahap berikutnya: Pembuatan kerangka awal proyek Android.
+Tahap berikutnya: Verifikasi build Tahap 1 dan perbaikan jika ada error. Tahap fitur selanjutnya ditentukan oleh pemilik proyek (QR Scanner tidak dimulai sebelum kerangka berhasil dikompilasi).
 
-Tanggal pembaruan: Isi setiap kali dokumen diperbarui.
+Tanggal pembaruan: 2026-11-28.
 
-File penting: Isi berdasarkan struktur proyek aktual.
+File penting:
+- `settings.gradle.kts`, `build.gradle.kts`, `gradle.properties`, `gradle/libs.versions.toml`, `gradle/wrapper/gradle-wrapper.properties`
+- `app/build.gradle.kts`, `app/src/main/AndroidManifest.xml`
+- `app/src/main/res/` (layout `activity_main`, `activity_feature_placeholder`; tema navy dan putih di `values/`)
+- Kode Kotlin: lihat bagian 6.
 
-Dependency penting: Catat versi berdasarkan file Gradle aktual.
+Dependency penting (versi dipilih dari dokumentasi/rilis resmi yang diperiksa pada 2026-11-28; belum dibuktikan lewat build):
+- Android Gradle Plugin 9.4.0 (butuh Gradle 9.6.0, JDK 17; dukungan Kotlin bawaan, tanpa plugin `kotlin-android`)
+- KSP 2.3.11 (Room memakai KSP)
+- Room 2.8.4
+- AppCompat 1.8.0, Activity 1.13.0, Lifecycle 2.11.0
+- Material Components 1.14.0
+- compileSdk 37 (diwajibkan androidx.core 1.19), targetSdk 36, minSdk 23
+- Belum ditambahkan (sengaja): ML Kit Barcode Scanning dan permission CAMERA — menunggu tahap QR Scanner.
 
-Masalah yang belum diselesaikan: Isi berdasarkan hasil pengembangan terakhir.
+Masalah yang belum diselesaikan:
+- Build Tahap 1 belum diverifikasi; kemungkinan perlu penyesuaian versi/konfigurasi.
+- `gradlew`, `gradlew.bat`, dan `gradle/wrapper/gradle-wrapper.jar` belum ada di repository (file biner tidak dapat dibuat dari lingkungan pengembangan ini).
+- Folder `app/schemas/` (skema Room) baru terbuat setelah build pertama; sebaiknya di-commit.
+- Daftar domain ujian yang diizinkan belum diberikan; belum boleh diasumsikan.
+- targetSdk 36 perlu dicocokkan dengan persyaratan Google Play saat tahap rilis.
+- Minify/R8 dimatikan sementara; diaktifkan pada tahap rilis.
 
 ## 10. INSTRUKSI UNTUK AI PENGEMBANG
 

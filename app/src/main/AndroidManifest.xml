@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Belum ada permission. CAMERA akan ditambahkan pada tahap QR Scanner. -->
+
+    <application
+        android:name=".SecureExamApp"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_label"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SecureExam"
+        android:usesCleartextTraffic="false">
+
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.scan.ScanQrActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.security.SecurityStatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.history.ViolationHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.alert.AlertToneTestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.pin.PinSettingsActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>
